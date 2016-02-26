@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My validation plugin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/jquery.myvalidate.js"></script>
+    <script>
+    	$(function(){
+            $("#form1").myvalidate({
+                rules: {
+                    UserName: {
+                        required: true,
+                        minlength: 4
+                    },
+                    Password: {
+                        required: true,
+                    },
+                    PasswordConfirm: {
+                        equalto: "Password"
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    PhoneNumber: {
+                        required: true,
+                        number: true
+                    }
+                },
+                messages: {
+                    UserName: {
+                        required: "Yêu cầu nhập user name.",
+                        minlength: "Tên đăng nhập dài ít nhất 4 ký tự."
+                    },
+                    Password: "Yêu cầu nhập password.",
+                    PasswordConfirm: {
+                        equalto: "Mật khẩu không khớp."
+                    },
+                    Email: {
+                        required: "Yêu cầu nhập email.",
+                        email: "Email không đúng định dạng."
+                    },
+                    PhoneNumber: "Số điện thoại phải là kiểu số."
+                }
+            });
+
+            $("#form2").myvalidate();
+
+            $("#form3").myvalidate({
+                rules: {
+                    Password: "required"
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">My validate plugin form</h1>
+        <h3 class="col4-offset">Validation with plugin options</h3>
+        <form action="" id="form1">
+            <div class="row">
+                <label for="UserName" class="col4 control-label">User name</label>
+                <div class="col8">
+                    <input type="text" name="UserName" />
+                </div>
+            </div>
+            <div class="row">
+                <label for="Password" class="col4 control-label">Password</label>
+                <div class="col8">
+                    <input type="password" name="Password">
+                </div>
+            </div>
+            <div class="row">
+                <label for="PasswordConfirm" class="col4 control-label">Password confirm</label>
+                <div class="col8">
+                    <input type="password" name="PasswordConfirm">
+                </div>
+            </div>
+            <div class="row">
+                <label for="Email" class="col4 control-label">Email</label>
+                <div class="col8">
+                    <input type="text" name="Email" />
+                </div>
+            </div>
+            <div class="row">
+                <label for="PhoneNumber" class="col4 control-label">Phone number</label>
+                <div class="col8">
+                    <input type="text" name="PhoneNumber">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col8 col4-offset">
+                    <button class="btn" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+
+        <h3 class="col4-offset">Validation with inline data attributes</h3>
+        <form action="" id="form2">
+            <div class="row">
+                <label for="UserName" class="col4 control-label">User name</label>
+                <div class="col8">
+                    <input type="text" data-rule-required="true" data-msg-required="Yêu cầu nhập username!" name="UserName" />
+                </div>
+            </div>
+            <div class="row">
+                <label for="Password" class="col4 control-label">Password</label>
+                <div class="col8">
+                    <input type="password" name="Password" data-rule-required="true" data-msg-required="Yêu cầu nhập password!" >
+                </div>
+            </div>
+            <div class="row">
+                <label for="PasswordConfirm" class="col4 control-label">Password confirm</label>
+                <div class="col8">
+                    <input type="password" name="PasswordConfirm" data-rule-equalto="Password" data-msg-equalto="Mật khẩu nhập lại không đúng." >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col8 col4-offset">
+                    <button class="btn" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+
+        <h3 class="col4-offset">Validation with default messages</h3>
+        <form action="" id="form3">
+            <div class="row">
+                <label for="UserName" class="col4 control-label">User name</label>
+                <div class="col8">
+                    <input type="text" data-rule-required="true" name="UserName" />
+                </div>
+            </div>
+            <div class="row">
+                <label for="Password" class="col4 control-label">Password</label>
+                <div class="col8">
+                    <input type="password" name="Password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col8 col4-offset">
+                    <button class="btn" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
