@@ -116,16 +116,20 @@
 
             this.elements.each(function(){
                 var input = this;
-                $(this).keyup(function(){
-                    validator.checkElement(input);
-                });
 
-                $(this).focusout(function(){
-                    validator.checkElement(input);
-                });
+                if(input.type=="checkbox"){
+                    $(this).click(function(){
+                        validator.checkElement(input);
+                    });
+                } else {
+                    $(this).keyup(function(){
+                        validator.checkElement(input);
+                    });
 
-                //validator.keyEvents().bindKeyUp(this);
-                //validator.keyEvents().bindFocusOut(this);
+                    $(this).focusout(function(){
+                        validator.checkElement(input);
+                    });
+                }
             });
         },
         bindSumitEvent: function(){
@@ -182,9 +186,16 @@
 
             var val = $input.val();
 
-            if (typeof $input.data("rule-required") !== "undefined" && !val) {
+            if (typeof $input.data("rule-required") !== "undefined") {
                 var name = $input.attr("name");
-                this.showErrorMessage(input, "required");
+                if(input.type == "checkbox"){
+                    if(!$input.is(":checked")){
+                        this.showErrorMessage(input, "required");
+                    }
+                } else if(!val) {
+                    this.showErrorMessage(input, "required");
+                }
+                
             } else if(typeof $input.data("rule-email") !== "undefined"&& val.length && !this.isEmail(val)){
                 this.showErrorMessage(input, "email");
             } else if(typeof $input.data("rule-number") !== "undefined"&& val.length && !this.isNumber(val)){

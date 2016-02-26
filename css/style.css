@@ -39,7 +39,7 @@ padding: 4px;
     width: 66.66666667%;
 }
 
-input{
+.input{
 	padding: 4px;
 	width: 100%;
 }
@@ -78,4 +78,8 @@ h1.title{
 
 .title{
     text-align: center;
+}
+
+.error{
+    color: #E80000;
 }
